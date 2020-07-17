@@ -6,6 +6,7 @@ export const initialState = {
   posts: [],
   postWithSlug: [],
   errors: '',
+  currPageNum: 1,
 };
 
 const postsSlice = createSlice({
@@ -24,6 +25,12 @@ const postsSlice = createSlice({
     setPostWithSlug: (state, { payload }) => {
       state.postWithSlug = payload;
     },
+    setNextPg: state => {
+      state.currPageNum += 1;
+    },
+    setPrevPg: state => {
+      state.currPageNum -= 1;
+    },
   },
 });
 
@@ -32,6 +39,8 @@ export const {
   setLoading,
   setErrors,
   setPostWithSlug,
+  setNextPg,
+  setPrevPg,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -8,31 +8,36 @@ import Nav from './Nav';
 import PostWithSlug from './PostWithSlug';
 import Footer from './Footer';
 
-import { postsSelector, getPosts } from './features/post/PostsSlice';
+import {
+  postsSelector,
+  getPosts,
+  setPrevPg,
+  setNextPg,
+} from './features/post/PostsSlice';
 import PostWithPagination from './PostWithPagination';
 
 function App() {
-  const { errors, loading, posts } = useSelector(postsSelector);
+  const { errors, loading, posts, currPageNum } = useSelector(postsSelector);
   const dispatch = useDispatch();
-  const [pageNum, setPageNum] = useState(2);
 
   const handleFetchPosts = pageNum => {
     dispatch(getPosts(pageNum));
   };
 
   useEffect(() => {
-    const pgNum = pageNum - 1;
-    handleFetchPosts(pgNum);
+    handleFetchPosts(currPageNum);
   }, []);
 
   const handlePrev = () => {
-    setPageNum(prevState => prevState - 1);
-    handleFetchPosts(pageNum);
+    dispatch(setPrevPg());
+    handleFetchPosts(currPageNum);
+    console.log('prev', currPageNum);
   };
 
   const handleNext = () => {
-    setPageNum(prevState => prevState + 1);
-    handleFetchPosts(pageNum);
+    dispatch(setNextPg());
+    handleFetchPosts(currPageNum);
+    console.log('next', currPageNum);
   };
 
   return (

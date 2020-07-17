@@ -13,6 +13,10 @@ A blog using the Wordpress API.
 
 []()
 
+## Video Demo
+
+![video_demo](/epawa.gif)
+
 ## Getting Started
 
 **To get started, follow the instructions below**
