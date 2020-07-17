@@ -14,14 +14,15 @@ import PostWithPagination from './PostWithPagination';
 function App() {
   const { errors, loading, posts } = useSelector(postsSelector);
   const dispatch = useDispatch();
-  const [pageNum, setPageNum] = useState(1);
+  const [pageNum, setPageNum] = useState(2);
 
   const handleFetchPosts = pageNum => {
     dispatch(getPosts(pageNum));
   };
 
   useEffect(() => {
-    handleFetchPosts(pageNum);
+    const pgNum = pageNum - 1;
+    handleFetchPosts(pgNum);
   }, []);
 
   const handlePrev = () => {

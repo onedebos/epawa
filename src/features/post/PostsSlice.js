@@ -22,7 +22,7 @@ const postsSlice = createSlice({
       state.errors = payload;
     },
     setPostWithSlug: (state, { payload }) => {
-      state.postWithSlug = state.posts.filter(post => post.slug === payload);
+      state.postWithSlug = payload;
     },
   },
 });
@@ -47,6 +47,23 @@ export function getPosts(pageNum) {
       );
 
       dispatch(setPosts(posts.data));
+      dispatch(setLoading(false));
+    } catch (error) {
+      dispatch(setErrors('Something went wrong while getting the posts.'));
+      dispatch(setLoading(false));
+    }
+  };
+}
+
+export function getPostWithSlug(slug) {
+  return async dispatch => {
+    dispatch(setLoading(true));
+    try {
+      const posts = await axios.get(
+        `https://epower.ng/wp-json/wp/v2/posts?slug=${slug}`,
+      );
+
+      dispatch(setPostWithSlug(posts.data));
       dispatch(setLoading(false));
     } catch (error) {
       dispatch(setErrors('Something went wrong while getting the posts.'));

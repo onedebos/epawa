@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import postsSliceReducer from './features/post/PostsSlice';
 import App from './App';
 
-require('typeface-work-sans');
+require('typeface-nunito');
 
 const store = configureStore({
   reducer: { posts: postsSliceReducer },
