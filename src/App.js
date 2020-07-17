@@ -1,25 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Nav from './Nav';
+import PostWithSlug from './PostWithSlug';
+import Footer from './Footer';
+
+import { postsSelector, getPosts } from './features/post/PostsSlice';
+import PostWithPagination from './PostWithPagination';
 
 function App() {
+  const { errors, loading, posts } = useSelector(postsSelector);
+  const dispatch = useDispatch();
+  const [pageNum, setPageNum] = useState(1);
+
+  const handleFetchPosts = pageNum => {
+    dispatch(getPosts(pageNum));
+  };
+
+  useEffect(() => {
+    handleFetchPosts(pageNum);
+  }, []);
+
+  const handlePrev = () => {
+    setPageNum(prevState => prevState - 1);
+    handleFetchPosts(pageNum);
+  };
+
+  const handleNext = () => {
+    setPageNum(prevState => prevState + 1);
+    handleFetchPosts(pageNum);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      {loading ? '' : <Nav />}
+      <Switch>
+        <Route path="/:slug" component={PostWithSlug} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <PostWithPagination
+              loading={loading}
+              handlePrev={handlePrev}
+              handleNext={handleNext}
+              posts={posts}
+              error={errors}
+            />
+          )}
+        />
+      </Switch>
+      {loading ? '' : <Footer />}
+    </BrowserRouter>
   );
 }
 
