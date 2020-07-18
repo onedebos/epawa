@@ -1,2 +1,3 @@
-*.css
+*.css linguist-vendored=false
 src/styles/ linguist-vendored
+src/styles/ linguist-vendored=false
