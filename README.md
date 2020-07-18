@@ -49,7 +49,7 @@ npm start
 
 - Github: [@onedebos](https://github.com/onedebos)
 - Linkedin: [linkedin](https://www.linkedin.com/in/adebola-niran/)
-- Portfolio: [portfolio](https://www.adebola.dev/)
+- Portfolio: [adebola.dev](https://www.adebola.dev/)
 
 ## 📝 License
 
