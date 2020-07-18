@@ -26,7 +26,7 @@ const PostWithSlug = () => {
   }
 
   return (
-    <div className="bg-white text-gray-600 leading-normal text-base tracking-normal ">
+    <div className="bg-white text-gray-600 leading-normal text-base tracking-normal min-h-full">
       <div className="w-full container mx-auto mt-0 px-6 py-3">
         <div className="bg-teal-600 p-5 mb-6">
           <p className="font-bold text-white text-2xl text-center">
