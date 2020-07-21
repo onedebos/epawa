@@ -11,7 +11,7 @@ A blog using the Wordpress API.
 
 ## Live version
 
-[Live](epawa.netlify.app)
+[Live](https://epawa.netlify.app)
 
 ## Video Demo
 
